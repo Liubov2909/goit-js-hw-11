@@ -1,48 +1,19 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import { createMessage } from './js/library-izi';
+import { downloadImages } from './js/request';
 
-const searchParams = new URLSearchParams({
-  key: '41529899-34462864becb6db8698a10d1b',
-  q: 'black',
-  image_type: 'photo',
-  orientation: 'horizontal',
-  safesearch: true,
+const formEl = document.querySelector('.search-form');
+
+document.querySelector('.loading-message').style.display = 'none';
+
+formEl.addEventListener('submit', event => {
+  event.preventDefault();
+
+  let searchKey = formEl.elements.search.value.trim();
+  if (!searchKey) {
+    createMessage('Search must be filled!');
+    return;
+  }
+  formEl.reset();
+
+  downloadImages(searchKey);
 });
-
-fetch(`https://pixabay.com/api/?${searchParams}`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
-    }
-    return response.json();
-  })
-  .then(images => {
-    console.log(images);
-    const gallery = document.querySelector('.gallery');
-
-    const renderImg = images.reduce((html, image) => {
-      return (
-        html +
-        `<li class="gallery-item">
-        <a href=${image.largeImageURL}> 
-          <img src =${image.webformatURL} alt=${image.tags}/>
-        </a>
-      <p>Likes: ${image.likes}</p>
-      <p>views: ${image.views}</p>
-      <p>comments: ${image.comments}</p>
-      <p>downloads: ${image.downloads}</p>
-      </li>`
-      );
-    }, '');
-    gallery.innerHTML = renderImg;
-  })
-  .catch(error => {
-    iziToast.error({
-      position: 'bottomCenter',
-      message: error.message,
-    });
-  });

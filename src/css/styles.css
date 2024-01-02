@@ -7,24 +7,6 @@
 
 @import url('./reset.css');
 
-@font-face {
-  font-family: 'Montserrat';
-  font-weight: 400;
-  src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-weight: 500;
-  src: url('../fonts/Montserrat-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  font-weight: 700;
-  src: url('../fonts/Montserrat-Bold.ttf') format('truetype');
-}
-
 .search-form {
   text-align: center;
   margin-top: 36px;
