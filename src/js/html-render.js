@@ -17,6 +17,8 @@ export function renderImages(images) {
     createMessage(
       'Sorry, there are no images matching your search query. Please try again!'
     );
+    galleryEl.innerHTML = '';
+
     return;
   }
 

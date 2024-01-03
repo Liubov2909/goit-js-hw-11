@@ -32,7 +32,6 @@ function fetchImages(searchText) {
   searchOptionsOb.q = searchText;
   const searchOptions = new URLSearchParams(searchOptionsOb);
 
-  setTimeout(() => {}, 5000);
   return fetch(`https://pixabay.com/api/?${searchOptions.toString()}`)
     .then(response => {
       if (!response.ok) {
